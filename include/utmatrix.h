@@ -149,12 +149,6 @@ TVector<ValType>& TVector<ValType>::operator=(const TVector &v)
 template <class ValType> // прибавить скаляр
 TVector<ValType> TVector<ValType>::operator+(const ValType &val)
 {
-    /*TVector<ValType> temp(*this);
-    for (int i = 0; i < temp.Size; i++)
-        temp.pVector[i] += val;
-
-    return temp;*/
-
     for (int i = 0; i < Size; i++)
         pVector[i] += val;
 
@@ -249,10 +243,10 @@ public:
 template <class ValType>
 TMatrix<ValType>::TMatrix(int s) : TVector<TVector<ValType> >(s)
 {
-    if (s > MAX_MATRIX_SIZE)
-        throw logic_error("Invalid value for the Size");
+    if (s < 0 || s > MAX_MATRIX_SIZE)
+        throw logic_error("Invalid value for the Size(matrix size is greater than 0 or maximum value)");
 
-    for (int i = 0; i < Size; i++)
+    for (int i = 0; i < s; i++)
     {
         TVector<ValType> temp(s - i, i);
         this->pVector[i] = temp;
