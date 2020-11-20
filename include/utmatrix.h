@@ -149,28 +149,31 @@ TVector<ValType>& TVector<ValType>::operator=(const TVector &v)
 template <class ValType> // прибавить скаляр
 TVector<ValType> TVector<ValType>::operator+(const ValType &val)
 {
-    for (int i = 0; i < Size; i++)
-        pVector[i] += val;
+    TVector<ValType> temp(*this);
+    for (int i = 0; i < temp.Size; i++)
+        temp.pVector[i] += val;
 
-    return *this;
+    return temp;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // вычесть скаляр
 TVector<ValType> TVector<ValType>::operator-(const ValType &val)
 {
-    for (int i = 0; i < Size; i++)
-        pVector[i] -= val;
+    TVector<ValType> temp(*this);
+    for (int i = 0; i < temp.Size; i++)
+        temp.pVector[i] -= val;
 
-    return *this;
+    return temp;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // умножить на скаляр
 TVector<ValType> TVector<ValType>::operator*(const ValType &val)
 {
-    for (int i = 0; i < Size; i++)
-        pVector[i] *= val;
+    TVector<ValType> temp(*this);
+    for (int i = 0; i < temp.Size; i++)
+        temp.pVector[i] *= val;
 
-    return *this;
+    return temp;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // сложение
@@ -179,10 +182,11 @@ TVector<ValType> TVector<ValType>::operator+(const TVector<ValType> &v)
     if (Size != v.Size)
         throw logic_error("Vectors have different sizes");
 
-    for (int i = 0; i < Size; i++)
-        pVector[i] += v.pVector[i];
+    TVector<ValType> temp(*this);
+    for (int i = 0; i < temp.Size; i++)
+        temp.pVector[i] += v.pVector[i];
 
-    return *this;
+    return temp;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // вычитание
@@ -191,10 +195,11 @@ TVector<ValType> TVector<ValType>::operator-(const TVector<ValType> &v)
     if (Size != v.Size)
         throw logic_error("Vectors have different sizes");
 
-    for (int i = 0; i < Size; i++)
-        pVector[i] -= v.pVector[i];
+    TVector<ValType> temp(*this);
+    for (int i = 0; i < temp.Size; i++)
+        temp.pVector[i] -= v.pVector[i];
 
-    return *this;
+    return temp;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // скалярное произведение
@@ -310,13 +315,14 @@ TMatrix<ValType>& TMatrix<ValType>::operator=(const TMatrix<ValType> &mt)
 template <class ValType> // сложение
 TMatrix<ValType> TMatrix<ValType>::operator+(const TMatrix<ValType> &mt)
 {
-    if (this->Size != mt.Size)
+   if (this->Size != mt.Size)
         throw logic_error("Matrices gave different sizes");
 
-    for (int i = 0; i < this->Size; i++)
-        this->pVector[i] = this->pVector[i] + mt.pVector[i];
+   TMatrix<ValType> temp(*this);
+    for (int i = 0; i < temp.Size; i++)
+        temp.pVector[i] = temp.pVector[i] + mt.pVector[i];
     
-    return *this;
+    return temp;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // вычитание
@@ -325,10 +331,11 @@ TMatrix<ValType> TMatrix<ValType>::operator-(const TMatrix<ValType> &mt)
     if (this->Size != mt.Size)
         throw logic_error("Matrices gave different sizes");
 
-    for (int i = 0; i < this->Size; i++)
-        this->pVector[i] = this->pVector[i] - mt.pVector[i];
+    TMatrix<ValType> temp(*this);
+    for (int i = 0; i < temp.Size; i++)
+        temp.pVector[i] = temp.pVector[i] - mt.pVector[i];
 
-    return *this;
+    return temp;
 } /*-------------------------------------------------------------------------*/
 
 // TVector О3 Л2 П4 С6
